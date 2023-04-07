@@ -39,7 +39,7 @@ client.on('messageCreate',message =>{
     if(message.content == 'ping'){
         message.reply("pong")
     }
-    if(message.content.toLowerCase() == "!komutlar") {
+    if(message.content.toLowerCase() == "komutları göster aga") {
         message.author.send("----------------------------------------------\nsa içeren her kelime");
         message.author.send("ping");
         message.author.send("!söyle (tekrar edilecek kelime)");
