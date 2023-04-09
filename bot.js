@@ -1,5 +1,5 @@
 const { channel } = require('diagnostics_channel');
-const {Client, MessageAttachment,MessageEmbed, GatewayIntentBits, messageLink} = require('discord.js');
+const {Client, MessageAttachment,MessageEmbed, GatewayIntentBits, messageLink,ActivityType} = require('discord.js');
 require('dotenv/config');
 const client = new Client({
     intents: [
@@ -11,13 +11,14 @@ const client = new Client({
     ]
 });
 
-
 client.on('ready',() =>{
     console.log("Herşey Hazır!");
-    client.user.setActivity(`Age of History II`, { tpye: "STREAMING"})
+    client.user.setPresence({
+        activities: [{ name: `Matematik`, type: ActivityType.Watching }],
+        status: 'idle',
+      });
+    
 });
-
-let kanalid = "787718450206343221";
 
 
 
@@ -66,7 +67,17 @@ client.on('messageCreate',message =>{
         message.react("🇦")
         message.react("🇸")
     }
-
+    if(message.channelId == '1094688872866254920') {
+        if(message.content ==""){
+            message.react("🇦")
+            message.react("🇧")
+            message.react("🇨")
+            message.react("🇩")
+            message.react("🇪")
+        }
+        
+    }
+    
 
 
 
