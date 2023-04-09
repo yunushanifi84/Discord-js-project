@@ -10,6 +10,8 @@ const client = new Client({
         GatewayIntentBits.GuildVoiceStates
     ]
 });
+let durum = "Matematik";
+let aktivite = "online";
 
 client.on('ready',() =>{
     console.log("Herşey Hazır!");
@@ -20,8 +22,7 @@ client.on('ready',() =>{
     
 });
 
-
-
+let adminid="718497288963620904";
 
 
 
@@ -77,7 +78,69 @@ client.on('messageCreate',message =>{
         }
         
     }
-    
+    if(message.content.toLowerCase().startsWith("!durum ")&&(message.author.id==adminid)){
+        let yenidurum = message.content.substring(7)
+        durum=yenidurum;
+        client.user.setPresence({
+            activities: [{ name: durum, type: ActivityType.Watching }],
+            status: aktivite,
+          });
+        message.reply(`Durum ${durum} olarak değiştirildi.`);
+        return;
+
+    };
+    if(message.content.toLowerCase().startsWith("!aktivite ")&&(message.author.id=adminid)){
+        let temp = message.content.substring(10);
+        if(temp == "1"){
+            let yeniaktivite = "online";
+            aktivite = yeniaktivite;
+            client.user.setPresence({
+                activities: [{ name: durum, type: ActivityType.Watching }],
+                status: aktivite,
+              });
+            message.reply("Aktivite değişimi başarılı");
+            return;
+        }
+        else if (temp =="2"){
+            let yeniaktivite = "idle";
+            aktivite=yeniaktivite;
+            client.user.setPresence({
+                activities: [{ name: durum, type: ActivityType.Watching }],
+                status: aktivite,
+              });
+            message.reply("Aktivite değişimi başarılı");
+            return;
+        }
+        else if (temp == "3"){
+            let yeniaktivite = "invisible";
+            aktivite=yeniaktivite;
+            client.user.setPresence({
+                activities: [{ name: durum, type: ActivityType.Watching }],
+                status: aktivite,
+              });
+            message.reply("Aktivite değişimi başarılı");
+            return;
+        }
+        else if (temp == "4"){
+            let yeniaktivite = "dnd";
+            aktivite= yeniaktivite;
+            client.user.setPresence({
+                activities: [{ name: durum, type: ActivityType.Watching }],
+                status: aktivite,
+              });
+            message.reply("Aktivite değişimi başarılı");
+            return;
+        }
+        else if (temp == "yardım"){
+            message.reply("1-Aktif\n2-Boşta\n3-Görünmez\n4-Rahatsız etmeyin");
+            return;
+        }
+        else {
+            message.reply("Yanlış kullanım.");
+            return;
+        }
+    }
+
 
 
 
