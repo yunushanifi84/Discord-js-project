@@ -1,6 +1,7 @@
 const { channel } = require('diagnostics_channel');
 const {Client, MessageAttachment,MessageEmbed, GatewayIntentBits, messageLink,ActivityType} = require('discord.js');
 require('dotenv/config');
+const { joinVoiceChannel } = require('@discordjs/voice');
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -35,9 +36,39 @@ let adminid="718497288963620904";
 
 
 
-
 client.on('messageCreate',message =>{
+
+
     if(message.author.bot) return;
+
+    if(message.content=="!katıl"){
+        try {
+            const Connection = joinVoiceChannel({
+                channelId: message.member.voice.channel.id,
+                guildId: message.member.guild.id,
+                adapterCreator: message.member.guild.voiceAdapterCreator,
+            });
+        } catch (error) {
+            message.channel.send("Herhangi bir kanalda bulunmuyorsunuz.");
+        }
+        
+    }
+    if(message.content == "!ayrıl"){
+        try {
+            const Connection = joinVoiceChannel({
+                channelId: message.member.voice.channel.id,
+                guildId: message.member.guild.id,
+                adapterCreator: message.member.guild.voiceAdapterCreator,
+            });
+            Connection.destroy();
+        } catch (error) {
+            message.channel.send("botu ayırmak için botun olduğu kanala gidin.");
+        }
+    }
+
+
+
+
     if(message.content == 'ping'){
         message.reply("pong")
     }
