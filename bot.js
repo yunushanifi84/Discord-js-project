@@ -83,13 +83,18 @@ client.on('messageCreate',message =>{
         message.reply(yazi);
     }
     if(message.content.startsWith("!mesaj ")) {
-        let mesaj = message.content.substring(7);
-        const startindex = mesaj.indexOf('@');
-        const endindex = mesaj.indexOf('>');
-        const gonderilecekid = mesaj.substring(startindex+1,endindex);
-        const ham_mesaj = mesaj.substring(endindex+1);
-        const kullanici = client.users.cache.get(gonderilecekid);
-        kullanici.send(ham_mesaj);
+        try {
+            let mesaj = message.content.substring(7);
+            const startindex = mesaj.indexOf('@');
+            const endindex = mesaj.indexOf('>');
+            const gonderilecekid = mesaj.substring(startindex+1,endindex);
+            const ham_mesaj = mesaj.substring(endindex+1);
+            const kullanici = client.users.cache.get(gonderilecekid);
+            kullanici.send(ham_mesaj);
+        } catch {
+            message.channel.send("Bir hatayla karşılaşıldı.");
+        }
+        
     }
     if(message.content.toLowerCase() == "naber aga") {
         message.reply(`İyiyim Senden naber ${message.member.displayName}`)
