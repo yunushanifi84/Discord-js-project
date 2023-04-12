@@ -84,6 +84,9 @@ client.on('messageCreate',message =>{
     if(message.content.toLowerCase().startsWith("!")){
     let anamesaj = message.content.substring(1);   
     }
+    else {
+        return;
+    }
 
     if(anamesaj.toLowerCase() == "katıl"){
         try {
