@@ -211,6 +211,7 @@ client.on('messageCreate',message =>{
         const kaynak = createAudioResource('./ses/ses.mp3');
         player.play(kaynak);
         try {
+            console.log("deneme");
             const Connection = joinVoiceChannel({
                 channelId: message.member.voice.channel.id,
                 guildId: message.member.guild.id,
