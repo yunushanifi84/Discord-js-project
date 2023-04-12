@@ -31,7 +31,7 @@ client.on('ready',() =>{
       });
     
 });
-
+const kaynak = createAudioResource('./ses/ses.mp3');
 let adminid="718497288963620904";
 
 
@@ -208,16 +208,17 @@ client.on('messageCreate',message =>{
             if(err) throw new Error(err)
             message.channel.send("Söyleniyor...");
         });
-        
         const kaynak = createAudioResource('./ses/ses.mp3');
         player.play(kaynak);
-        console.log(soylenecek);
-        const Connection = joinVoiceChannel({
-            channelId: message.member.voice.channel.id,
-            guildId: message.member.guild.id,
-            adapterCreator: message.member.guild.voiceAdapterCreator,
+        try {
+            console.log(soylenecek);
+            const Connection = joinVoiceChannel({
+                channelId: message.member.voice.channel.id,
+                guildId: message.member.guild.id,
+                adapterCreator: message.member.guild.voiceAdapterCreator,
             });
-        Connection.subscribe(player);
+            Connection.subscribe(player);
+        } catch(error) {}
 
     }
 
