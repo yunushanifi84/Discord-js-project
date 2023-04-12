@@ -13,6 +13,7 @@ const client = new Client({
 });
 let durum = "Matematik";
 let aktivite = "online";
+let mainprefix = '!';
 
 const player = createAudioPlayer({
     behaviors: {
@@ -82,11 +83,9 @@ client.on('messageCreate',message =>{
 
     //prefix sonrası
     if(message.content.toLowerCase().includes("!")){
+    return;
+    }
     let anamesaj = message.content.substring(1);
-    }
-    else {
-        return;
-    }
 
     if(anamesaj.toLowerCase() == "katıl"){
         try {
