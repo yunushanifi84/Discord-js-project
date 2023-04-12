@@ -208,17 +208,16 @@ client.on('messageCreate',message =>{
             if(err) throw new Error(err)
             message.channel.send("Söyleniyor...");
         });
+        
         const kaynak = createAudioResource('./ses/ses.mp3');
         player.play(kaynak);
-        try {
-            console.log("deneme");
-            const Connection = joinVoiceChannel({
-                channelId: message.member.voice.channel.id,
-                guildId: message.member.guild.id,
-                adapterCreator: message.member.guild.voiceAdapterCreator,
+        console.log(soylenecek);
+        const Connection = joinVoiceChannel({
+            channelId: message.member.voice.channel.id,
+            guildId: message.member.guild.id,
+            adapterCreator: message.member.guild.voiceAdapterCreator,
             });
-            Connection.subscribe(player);
-        } catch(error) {}
+        Connection.subscribe(player);
 
     }
 
