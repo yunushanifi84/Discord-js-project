@@ -82,9 +82,12 @@ client.on('messageCreate',message =>{
 
 
     //prefix sonrası
+
+
     if(!message.content.toLowerCase().includes("!")){
     return;
     }
+
     let anamesaj = message.content.substring(1);
 
     if(anamesaj.toLowerCase() == "katıl"){
@@ -115,8 +118,9 @@ client.on('messageCreate',message =>{
     
     if(anamesaj.toLowerCase().startsWith("söyle ")) {
         let yazi = anamesaj.substring(6);
-        message.reply(yazi);
+        message.channel.send(yazi);
     }
+
     if(anamesaj.toLowerCase().startsWith("mesaj ")) {
         try {
             let mesaj = anamesaj.substring(6);
@@ -132,9 +136,6 @@ client.on('messageCreate',message =>{
         
     }
     
-    
-
-    
     if((anamesaj.toLowerCase().startsWith("durum "))&&(message.author.id==adminid)){
         let yenidurum =anamesaj.substring(6);
         durum=yenidurum;
@@ -146,6 +147,7 @@ client.on('messageCreate',message =>{
         return;
 
     };
+    
     if((anamesaj.toLowerCase().startsWith("aktivite "))&&(message.author.id=adminid)){
         let temp = anamesaj.substring(9);
         if(temp == "1"){
