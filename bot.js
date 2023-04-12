@@ -3,6 +3,7 @@ const {Client, MessageAttachment,MessageEmbed, GatewayIntentBits, messageLink,Ac
 require('dotenv/config');
 const gTTs = require('gtts');
 const { joinVoiceChannel, createAudioPlayer, NoSubscriberBehavior, createAudioResource } = require('@discordjs/voice');
+const { error } = require('console');
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -200,7 +201,13 @@ client.on('messageCreate',message =>{
             return;
         }
     }
-    if(anamesaj=="ses"){
+    if(anamesaj.toLowerCase().startsWith(ses )){
+        let soylenecek = anamesaj.substring(4);
+        const gtts = gTTs(soylenecek,'tr');
+        gtts.save('./ses/ses.mp3', (err) => {
+            if(err) throw new Error(err)
+            message.channel.send("Söyleniyor...");
+        });
         const kaynak = createAudioResource('./ses/ses.mp3');
         player.play(kaynak);
         try {
