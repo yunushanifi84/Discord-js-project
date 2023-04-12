@@ -201,7 +201,7 @@ client.on('messageCreate',message =>{
             return;
         }
     }
-    if(anamesaj.toLowerCase().startsWith(ses )){
+    if(anamesaj.toLowerCase().startsWith('ses ')){
         let soylenecek = anamesaj.substring(4);
         const gtts = gTTs(soylenecek,'tr');
         gtts.save('./ses/ses.mp3', (err) => {
