@@ -1,7 +1,7 @@
 const { channel } = require('diagnostics_channel');
 const {Client, MessageAttachment,MessageEmbed, GatewayIntentBits, messageLink,ActivityType} = require('discord.js');
 require('dotenv/config');
-const { joinVoiceChannel } = require('@discordjs/voice');
+const { joinVoiceChannel, createAudioPlayer, NoSubscriberBehavior } = require('@discordjs/voice');
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -13,6 +13,12 @@ const client = new Client({
 });
 let durum = "Matematik";
 let aktivite = "online";
+
+const player = createAudioPlayer({
+    behaviors: {
+        noSubscriber: NoSubscriberBehavior.Pause,
+    },
+});
 
 client.on('ready',() =>{
     console.log("Herşey Hazır!");
@@ -37,11 +43,49 @@ let adminid="718497288963620904";
 
 
 client.on('messageCreate',message =>{
-
-
     if(message.author.bot) return;
+    //genel işlemler
+    if(message.channelId == '1094688872866254920') {
+        if(message.content ==""){
+            message.react("🇦")
+            message.react("🇧")
+            message.react("🇨")
+            message.react("🇩")
+            message.react("🇪")
+        }
+        
+    }
 
-    if(message.content=="!katıl"){
+
+
+
+    //prefixden öncesi
+    
+    if(message.content.toLowerCase() == "komutları göster aga") {
+        message.author.send("----------------------------------------------\nsa içeren her kelime");
+        message.author.send("ping");
+        message.author.send("!söyle (tekrar edilecek kelime)");
+        message.author.send("!mesaj (kişinin etiket hali) (gönderilecek mesaj)");
+    }
+
+    if(message.content.toLowerCase() == "naber aga") {
+        message.reply(`İyiyim Senden naber ${message.member.displayName}`)
+    }
+
+    if(message.content.toLowerCase() == 'sa'){
+        message.react("🇦")
+        message.react("🇸")
+    }
+
+
+
+
+    //prefix sonrası
+    if(message.content.toLowerCase().startsWith("!")){
+    let anamesaj = message.content.substring(1);   
+    }
+
+    if(anamesaj.toLowerCase() == "katıl"){
         try {
             const Connection = joinVoiceChannel({
                 channelId: message.member.voice.channel.id,
@@ -53,7 +97,8 @@ client.on('messageCreate',message =>{
         }
         
     }
-    if(message.content == "!ayrıl"){
+
+    if(anamesaj.toLowerCase() == "ayrıl"){
         try {
             const Connection = joinVoiceChannel({
                 channelId: message.member.voice.channel.id,
@@ -65,26 +110,14 @@ client.on('messageCreate',message =>{
             message.channel.send("botu ayırmak için botun olduğu kanala gidin.");
         }
     }
-
-
-
-
-    if(message.content == 'ping'){
-        message.reply("pong")
-    }
-    if(message.content.toLowerCase() == "komutları göster aga") {
-        message.author.send("----------------------------------------------\nsa içeren her kelime");
-        message.author.send("ping");
-        message.author.send("!söyle (tekrar edilecek kelime)");
-        message.author.send("!mesaj (kişinin etiket hali) (gönderilecek mesaj)");
-    }
-    if(message.content.toLowerCase().startsWith("!söyle ")) {
-        let yazi = message.content.substring(7);
+    
+    if(anamesaj.toLowerCase().startsWith("söyle ")) {
+        let yazi = anamesaj.substring(6);
         message.reply(yazi);
     }
-    if(message.content.startsWith("!mesaj ")) {
+    if(anamesaj.toLowerCase().startsWith("mesaj ")) {
         try {
-            let mesaj = message.content.substring(7);
+            let mesaj = anamesaj.substring(6);
             const startindex = mesaj.indexOf('@');
             const endindex = mesaj.indexOf('>');
             const gonderilecekid = mesaj.substring(startindex+1,endindex);
@@ -96,26 +129,12 @@ client.on('messageCreate',message =>{
         }
         
     }
-    if(message.content.toLowerCase() == "naber aga") {
-        message.reply(`İyiyim Senden naber ${message.member.displayName}`)
-    }
     
-    if(message.content.toLowerCase() == 'sa'){
-        message.react("🇦")
-        message.react("🇸")
-    }
-    if(message.channelId == '1094688872866254920') {
-        if(message.content ==""){
-            message.react("🇦")
-            message.react("🇧")
-            message.react("🇨")
-            message.react("🇩")
-            message.react("🇪")
-        }
-        
-    }
-    if(message.content.toLowerCase().startsWith("!durum ")&&(message.author.id==adminid)){
-        let yenidurum = message.content.substring(7)
+    
+
+    
+    if((anamesaj.toLowerCase().startsWith("durum "))&&(message.author.id==adminid)){
+        let yenidurum =anamesaj.substring(6);
         durum=yenidurum;
         client.user.setPresence({
             activities: [{ name: durum, type: ActivityType.Watching }],
@@ -125,8 +144,8 @@ client.on('messageCreate',message =>{
         return;
 
     };
-    if(message.content.toLowerCase().startsWith("!aktivite ")&&(message.author.id=adminid)){
-        let temp = message.content.substring(10);
+    if((anamesaj.toLowerCase().startsWith("aktivite "))&&(message.author.id=adminid)){
+        let temp = anamesaj.substring(9);
         if(temp == "1"){
             let yeniaktivite = "online";
             aktivite = yeniaktivite;
@@ -176,6 +195,8 @@ client.on('messageCreate',message =>{
             return;
         }
     }
+
+    
 
 
 
