@@ -81,8 +81,8 @@ client.on('messageCreate',message =>{
 
 
     //prefix sonrası
-    if(message.content.toLowerCase().startsWith("!")){
-    let anamesaj = message.content.substring(1);   
+    if(message.content.toLowerCase().includes("!")){
+    let anamesaj = message.content.substring(1);
     }
     else {
         return;
