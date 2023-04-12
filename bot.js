@@ -1,7 +1,8 @@
 const { channel } = require('diagnostics_channel');
 const {Client, MessageAttachment,MessageEmbed, GatewayIntentBits, messageLink,ActivityType} = require('discord.js');
 require('dotenv/config');
-const { joinVoiceChannel, createAudioPlayer, NoSubscriberBehavior } = require('@discordjs/voice');
+const gTTs = require('gtts');
+const { joinVoiceChannel, createAudioPlayer, NoSubscriberBehavior, createAudioResource } = require('@discordjs/voice');
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -198,6 +199,19 @@ client.on('messageCreate',message =>{
             message.reply("Yanlış kullanım.");
             return;
         }
+    }
+    if(anamesaj=="ses"){
+        const kaynak = createAudioResource('./ses/ses.mp3');
+        player.play(kaynak);
+        try {
+            const Connection = joinVoiceChannel({
+                channelId: message.member.voice.channel.id,
+                guildId: message.member.guild.id,
+                adapterCreator: message.member.guild.voiceAdapterCreator,
+            });
+            Connection.subscribe(player);
+        } catch(error) {}
+
     }
 
     
