@@ -82,7 +82,7 @@ client.on('messageCreate',message =>{
 
 
     //prefix sonrası
-    if(message.content.toLowerCase().includes("!")){
+    if(!message.content.toLowerCase().includes("!")){
     return;
     }
     let anamesaj = message.content.substring(1);
