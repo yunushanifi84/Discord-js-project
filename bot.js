@@ -214,7 +214,7 @@ client.on('messageCreate',message =>{
                 adapterCreator: message.member.guild.voiceAdapterCreator,
             });
             Connection.subscribe(player);
-            
+            Connection.disconnect();
         } catch(error) {
             console.log(error);
         }
