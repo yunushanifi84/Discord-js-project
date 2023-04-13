@@ -17,31 +17,35 @@ const commands = [];
 
 client.commands = new Collection();
 
-const commandsPath = path.join(__dirname, 'commands');
-const commandsFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+const foldersPath = path.join(__dirname, 'commands');
+const commandFolders = fs.readdirSync(foldersPath);
 
-for(const file of commandsFiles) {
-    const filePath = path.join(commandsPath, file);
-    const command = require(filePath);
-    if('data' in command && 'execute' in command) {
-        commands.push(command.data.toJSON());
-    } else {
-        console.log(`[HATA] ${filePath} komutunda hata var data veya execute eksiği`);
-    }
+for (const folder of commandFolders) {
+
+	const commandsPath = path.join(foldersPath, folder);
+	const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+	for (const file of commandFiles) {
+		const filePath = path.join(commandsPath, file);
+		const command = require(filePath);
+		if ('data' in command && 'execute' in command) {
+			commands.push(command.data.toJSON());
+		} else {
+			console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+		}
+	}
 }
-
 const rest = new REST().setToken(token);
 
 (async () => {
 	try {
-		console.log(`Komutlar yenilenmeye başlıyor ${commands.length} (/) komut`);
+		console.log(`Komutlar yenilenmeye başlıyor/ Yüklenecek Komut Sayısı: ${commands.length}`);
 
 		const data = await rest.put(
 			Routes.applicationGuildCommands(clientId, guildId),
 			{ body: commands },
 		);
 
-		console.log(`Uygulama Komutları başarıyla yenilendi (/) ${data.length}`);
+		console.log(`Uygulama Komutları başarıyla yenilendi/ Yüklenen Komut sayısı:${data.length}`);
 	} catch (error) {
 		
 		console.error(error);
