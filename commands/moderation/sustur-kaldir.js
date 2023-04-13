@@ -27,8 +27,8 @@ module.exports = {
             .setColor('Green')
             .setTimestamp()
         
-        if(member.roles.highest.position >= interaction.member.roles.highest.position)
-            return interaction.reply({ embeds: [errEmbed], ephemeral: true});
+        //if(member.roles.highest.position >= interaction.member.roles.highest.position)
+          //  return interaction.reply({ embeds: [errEmbed], ephemeral: true});
         try {
             await member.timeout(null);
 

@@ -1,4 +1,4 @@
-const {SlashCommandBuilder} = require('discord.js')
+const {SlashCommandBuilder,EmbedBuilder} = require('discord.js')
 
 
 module.exports = {
@@ -16,8 +16,17 @@ module.exports = {
         
         ),
     async execute(interaction) {
-        const {options} = interaction;
+        const {options,guild} = interaction;
         const secenek = options.getString('secim');
-        interaction.reply(`${secenek}`);
+        if(secenek=='bilgi'){
+            const cevap = new EmbedBuilder()
+                .setTitle("Sunucu Hakkında Bilgiler")
+                .setFields(
+                    {name:"Kullanıcı Sayısı:",value:`${interaction.member.guild.memberCount}`},
+                    {name:"Kurulduğu Tarih:",value:`${interaction.member.guild.createdAt}`},
+                )
+            return interaction.reply({embeds: [cevap]});
+        }
+        
     }
 }
