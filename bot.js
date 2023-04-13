@@ -218,8 +218,12 @@ client.on('messageCreate',message =>{
                 guildId: message.member.guild.id,
                 adapterCreator: message.member.guild.voiceAdapterCreator,
             });
-            Connection.subscribe(player);
-            Connection.disconnect();
+            try {
+                Connection.subscribe(player);
+            } catch(error) {
+                Connection.destroy();
+            }
+            
         } catch(error) {
             console.log(error);
         }
