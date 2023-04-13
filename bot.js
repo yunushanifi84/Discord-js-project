@@ -112,7 +112,7 @@ client.on('messageCreate',message =>{
                 guildId: message.member.guild.id,
                 adapterCreator: message.member.guild.voiceAdapterCreator,
             });
-            Connection.destroy();
+            Connection.disconnect();
         } catch (error) {
             message.channel.send("botu ayırmak için botun olduğu kanala gidin.");
             console.log(error);
@@ -205,11 +205,11 @@ client.on('messageCreate',message =>{
     if(anamesaj.toLowerCase().startsWith('ses ')){
         let soylenecek = anamesaj.substring(4);
         const gtts = new gTTs(soylenecek,'tr');
-        gtts.save('./ses/ses.mp3', (err) => {
+        gtts.save(`./ses/${soylenecek}.mp3`, (err) => {
             if(err) throw new Error(err)
             message.channel.send("Söyleniyor...");
         });
-        const kaynak = createAudioResource('./ses/ses.mp3');
+        const kaynak = createAudioResource(`./ses/${soylenecek}.mp3`);
         player.play(kaynak);
         try {
             console.log(soylenecek);
