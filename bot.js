@@ -94,7 +94,7 @@ client.on('messageCreate',message =>{
 
     if(anamesaj.toLowerCase() == "katıl"){
         try {
-            const Connection = joinVoiceChannel({
+            let Connection = joinVoiceChannel({
                 channelId: message.member.voice.channel.id,
                 guildId: message.member.guild.id,
                 adapterCreator: message.member.guild.voiceAdapterCreator,
@@ -107,14 +107,10 @@ client.on('messageCreate',message =>{
 
     if(anamesaj.toLowerCase() == "ayrıl"){
         try {
-            const Connection = joinVoiceChannel({
-                channelId: message.member.voice.channel.id,
-                guildId: message.member.guild.id,
-                adapterCreator: message.member.guild.voiceAdapterCreator,
-            });
             Connection.destroy();
         } catch (error) {
             message.channel.send("botu ayırmak için botun olduğu kanala gidin.");
+            console.log(error);
         }
     }
     
@@ -218,7 +214,10 @@ client.on('messageCreate',message =>{
                 adapterCreator: message.member.guild.voiceAdapterCreator,
             });
             Connection.subscribe(player);
-        } catch(error) {}
+            
+        } catch(error) {
+            console.log(error);
+        }
 
     }
 
