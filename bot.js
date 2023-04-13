@@ -205,11 +205,7 @@ client.on('messageCreate',message =>{
             if(err) throw new Error(err)
             message.channel.send("Söyleniyor...");
         });
-        const player = createAudioPlayer({
-            behaviors: {
-                noSubscriber: NoSubscriberBehavior.Pause,
-            },
-        });
+        const player = createAudioPlayer();
         const kaynak = createAudioResource(`./ses/${soylenecek}.mp3`);
         player.play(kaynak);
         try {
@@ -224,7 +220,7 @@ client.on('messageCreate',message =>{
             } catch(error) {
                 Connection.destroy();
             }
-            
+        
         } catch(error) {
             console.log(error);
         }
