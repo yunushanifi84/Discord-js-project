@@ -1,6 +1,9 @@
 const { channel } = require('diagnostics_channel');
-const {Client, MessageAttachment,MessageEmbed, GatewayIntentBits, messageLink,ActivityType} = require('discord.js');
+const fs = require('node:fs');
+const path = require('node:path');
+const {Client,REST,Routes,Collection,Events, MessageAttachment,MessageEmbed, GatewayIntentBits, messageLink,ActivityType, IntegrationExpireBehavior} = require('discord.js');
 require('dotenv/config');
+const { token, clientId, guildId } = require('./config.json');
 const gTTs = require('gtts');
 const { joinVoiceChannel, createAudioPlayer, NoSubscriberBehavior, createAudioResource } = require('@discordjs/voice');
 const { error } = require('console');
@@ -17,8 +20,6 @@ let durum = "Matematik";
 let aktivite = "online";
 let mainprefix = '!';
 
-
-
 client.on('ready',() =>{
     console.log("Herşey Hazır!");
     client.user.setPresence({
@@ -29,6 +30,58 @@ client.on('ready',() =>{
 });
 const kaynak = createAudioResource('./ses/ses.mp3');
 let adminid="718497288963620904";
+
+
+
+
+
+
+
+
+
+client.commands = new Collection();
+
+const commandsPath = path.join(__dirname, 'commands');
+const commandsFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+
+for(const file of commandsFiles) {
+    const filePath = path.join(commandsPath, file);
+    const command = require(filePath);
+    if('data' in command && 'execute' in command) {
+        client.commands.set(command.data.name, command);
+    } else {
+        console.log(`[HATA] ${filePath} komutunda hata var data veya execute eksiği`);
+    }
+}
+
+
+
+
+
+client.on(Events.InteractionCreate, async interaction => {
+    if(!interaction.isChatInputCommand()) return;
+    
+    const command = interaction.client.commands.get(interaction.commandName);
+
+    if(!command) {
+        console.error(`${inter.commandName} ismiyle eşleşen komut bulunamadı`);
+        return;
+    }
+
+    try {
+        await command.execute(interaction);
+    } catch(error) {
+        console.error(error);
+        if(interaction.replied || interaction.deferred) {
+            await interaction.followUp({ content: 'bu komutu çalıştırırken bir hata meydana geldi', ephemeral: true});
+
+        } else {
+            await interaction.reply({ content: 'bu komutu çalıştırırken bir hata meydana geldi', ephemeral: true});
+        }
+    }
+});
+
+
 
 
 
