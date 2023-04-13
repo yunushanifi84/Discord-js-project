@@ -17,11 +17,7 @@ let durum = "Matematik";
 let aktivite = "online";
 let mainprefix = '!';
 
-const player = createAudioPlayer({
-    behaviors: {
-        noSubscriber: NoSubscriberBehavior.Pause,
-    },
-});
+
 
 client.on('ready',() =>{
     console.log("Herşey Hazır!");
@@ -208,6 +204,11 @@ client.on('messageCreate',message =>{
         gtts.save(`./ses/${soylenecek}.mp3`, (err) => {
             if(err) throw new Error(err)
             message.channel.send("Söyleniyor...");
+        });
+        const player = createAudioPlayer({
+            behaviors: {
+                noSubscriber: NoSubscriberBehavior.Pause,
+            },
         });
         const kaynak = createAudioResource(`./ses/${soylenecek}.mp3`);
         player.play(kaynak);
