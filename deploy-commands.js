@@ -36,12 +36,26 @@ for (const folder of commandFolders) {
 }
 const rest = new REST().setToken(token);
 
+//Guild komutlarını silmek için
+/*
+rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: [] })
+	.then(() => console.log('Başarıyla bütün lonca komutların silindi.'))
+	.catch(console.error);
+*/
+
+//Global komutları silmek için
+/*
+rest.put(Routes.applicationCommands(clientId), { body: [] })
+	.then(() => console.log('Başarıyla bütün komutların silindi.'))
+	.catch(console.error);
+*/
+
 (async () => {
 	try {
 		console.log(`Komutlar yenilenmeye başlıyor/ Yüklenecek Komut Sayısı: ${commands.length}`);
 
 		const data = await rest.put(
-			Routes.applicationGuildCommands(clientId, guildId),
+			Routes.applicationCommands(clientId),
 			{ body: commands },
 		);
 
@@ -50,4 +64,5 @@ const rest = new REST().setToken(token);
 		
 		console.error(error);
 	}
+	
 })();

@@ -7,6 +7,7 @@ const { token, clientId, guildId } = require('./config.json');
 const gTTs = require('gtts');
 const { joinVoiceChannel, createAudioPlayer, NoSubscriberBehavior, createAudioResource } = require('@discordjs/voice');
 const { error } = require('console');
+const {distube} = require('distube');
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -16,10 +17,6 @@ const client = new Client({
         GatewayIntentBits.GuildVoiceStates
     ]
 });
-let durum = "Matematik";
-let aktivite = "online";
-let mainprefix = '!';
-
 client.on('ready',() =>{
     console.log("Herşey Hazır!");
     client.user.setPresence({
@@ -100,22 +97,7 @@ client.on(Events.InteractionCreate, async interaction => {
 client.on('messageCreate',message =>{
     if(message.author.bot) return;
     //genel işlemler
-    if(message.channelId == '1094688872866254920') {
-        if(message.content ==""){
-            message.react("🇦")
-            message.react("🇧")
-            message.react("🇨")
-            message.react("🇩")
-            message.react("🇪")
-        }
-        
-    }
 
-
-
-
-    //prefixden öncesi
-    
     if(message.content.toLowerCase() == "komutları göster aga") {
         message.author.send("----------------------------------------------\nsa içeren her kelime");
         message.author.send("ping");
@@ -144,37 +126,11 @@ client.on('messageCreate',message =>{
 
     let anamesaj = message.content.substring(1);
 
-    if(anamesaj.toLowerCase() == "katıl"){
-        try {
-            const Connection = joinVoiceChannel({
-                channelId: message.member.voice.channel.id,
-                guildId: message.member.guild.id,
-                adapterCreator: message.member.guild.voiceAdapterCreator,
-            });
-        } catch (error) {
-            message.channel.send("Herhangi bir kanalda bulunmuyorsunuz.");
-        }
-        
-    }
-
-    if(anamesaj.toLowerCase() == "ayrıl"){
-        try {
-            const Connection = joinVoiceChannel({
-                channelId: message.member.voice.channel.id,
-                guildId: message.member.guild.id,
-                adapterCreator: message.member.guild.voiceAdapterCreator,
-            });
-            Connection.disconnect();
-        } catch (error) {
-            message.channel.send("botu ayırmak için botun olduğu kanala gidin.");
-            console.log(error);
-        }
-    }
     if(anamesaj.toLowerCase().startsWith('ses ')){
         let soylenecek = anamesaj.substring(4);
         const gtts = new gTTs(soylenecek,'tr');
         gtts.save(`./ses/${soylenecek}.mp3`, (err) => {
-            if(err) throw new Error(err)
+            if(err) console.log(err);
             message.channel.send("Söyleniyor...");
         });
         const player = createAudioPlayer();
