@@ -12,7 +12,7 @@ module.exports = {
     async execute(interaction) {
         const {options} = interaction;
         const yazi = options.getString('yazi');
-        await interaction.reply({content:"tamam", ephemeral:true})
+        await interaction.reply({content:"tamam", ephemeral:true, deleteDelay: 5000});
         await interaction.channel.send(`${yazi}`);
     }
 }
