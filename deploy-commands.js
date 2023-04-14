@@ -50,6 +50,7 @@ rest.put(Routes.applicationCommands(clientId), { body: [] })
 	.catch(console.error);
 */
 
+
 (async () => {
 	try {
 		console.log(`Komutlar yenilenmeye başlıyor/ Yüklenecek Komut Sayısı: ${commands.length}`);
