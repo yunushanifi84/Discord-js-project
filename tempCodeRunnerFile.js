@@ -1,1 +1,0 @@
-member.guild.memberCount
