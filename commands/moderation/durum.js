@@ -40,7 +40,7 @@ module.exports = {
         if(interaction.user.id!='718497288963620904') {
             return interaction.reply("Bu komutu kullanma yetkiniz yok.");
         }
-        const durum_modu_converted = durum_modu;
+        let durum_modu_converted = durum_modu;
         if(durum_modu=="cevirimici"){
             durum_modu_converted='online';
         }
