@@ -1,4 +1,5 @@
 const {SlashCommandBuilder, PermissionFlagsBits,EmbedBuilder, embedLength,ActivityType} = require('discord.js');
+const {adminid} = require('../../config.json')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -37,7 +38,7 @@ module.exports = {
         const durum_modu = options.getString('durum-modu');
         const aktivite_modu = options.getString('aktivite-modu');
         
-        if(interaction.user.id!='718497288963620904') {
+        if(interaction.user.id!=adminid) {
             return interaction.reply("Bu komutu kullanma yetkiniz yok.");
         }
         let durum_modu_converted = durum_modu;

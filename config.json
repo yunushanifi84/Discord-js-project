@@ -1,5 +1,7 @@
 {
 	"token": "",
 	"clientId": "",
-	"guildId": "787718450206343218"
+	"guildId": "",
+	"dburi": "",
+	"adminid":""
 }
