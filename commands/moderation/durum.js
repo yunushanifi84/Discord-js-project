@@ -40,6 +40,20 @@ module.exports = {
         if(interaction.user.id!='718497288963620904') {
             return interaction.reply("Bu komutu kullanma yetkiniz yok.");
         }
+        const durum_modu_converted = durum_modu;
+        if(durum_modu=="cevirimici"){
+            durum_modu_converted='online';
+        }
+        if(durum_modu=="bosta"){
+            durum_modu_converted='idle';
+        }
+        if(durum_modu=="mesgul"){
+            durum_modu_converted='dnd';
+        }
+        if(durum_modu=="gorunmez"){
+            durum_modu_converted='invisible';
+        }
+
 
         const errEmbed = new EmbedBuilder()
             .setDescription('Birşeyler yanlış gitti. Lütfen daha sonra tekrar deneyiniz.')
@@ -58,7 +72,7 @@ module.exports = {
             try {
                 interaction.client.user.setPresence({
                     activities: [{ name: yenidurum, type: ActivityType.Competing }],
-                    status: durum_modu,
+                    status: durum_modu_converted,
                   });
                 return interaction.reply({embeds:[succEmbed]});
             } catch(err) {
@@ -70,7 +84,7 @@ module.exports = {
             try {
                 interaction.client.user.setPresence({
                     activities: [{ name: yenidurum, type: ActivityType.Listening }],
-                    status: durum_modu,
+                    status: durum_modu_converted,
                   });
                 return interaction.reply({embeds:[succEmbed]});
             } catch(err) {
@@ -82,7 +96,7 @@ module.exports = {
             try {
                 interaction.client.user.setPresence({
                     activities: [{ name: yenidurum, type: ActivityType.Playing }],
-                    status: durum_modu,
+                    status: durum_modu_converted,
                   });
                 return interaction.reply({embeds:[succEmbed]});
             } catch(err) {
@@ -94,7 +108,7 @@ module.exports = {
             try {
                 interaction.client.user.setPresence({
                     activities: [{ name: yenidurum, type: ActivityType.Watching }],
-                    status: durum_modu,
+                    status: durum_modu_converted,
                   });
                 return interaction.reply({embeds:[succEmbed]});
             } catch(err) {
