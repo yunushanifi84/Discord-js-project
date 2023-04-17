@@ -22,7 +22,7 @@ db.once('open', function() {
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("mesaj")
-        .setDescription("Belirtilen kişiye mesaj yollanır")
+        .setDescription("Belirtilen kişiye mesaj yollanır(200 puan)")
         .addUserOption(option =>
             option.setName('hedef')
                 .setDescription("Mesaj gönderilecek kişi.")

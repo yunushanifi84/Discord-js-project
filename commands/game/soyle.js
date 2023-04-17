@@ -21,7 +21,7 @@ db.once('open', function() {
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('soyle')
-        .setDescription("Yazdığınız şeyi söyler.")
+        .setDescription("Yazdığınız şeyi söyler.(100 puan)")
         .addStringOption(Option =>
             Option.setName('yazi')
                 .setDescription("Söyleyeceği Yazı!")
