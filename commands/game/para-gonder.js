@@ -62,6 +62,8 @@ module.exports = {
             const succembed = new EmbedBuilder()
                 .setTitle(`İşlem başarılı. Yeni bakiyeniz: ${user1.money}`)
                 .setColor('DarkGreen');
+            user1.save();
+            user2.save();
             return interaction.editReply({embeds:[succembed]});
             
 
