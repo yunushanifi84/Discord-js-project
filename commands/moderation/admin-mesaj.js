@@ -1,9 +1,9 @@
-const {SlashCommandBuilder} = require('discord.js');
-
+const {SlashCommandBuilder,EmbedBuilder} = require('discord.js');
+const {adminid} = require('../../config.json');
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("mesaj")
-        .setDescription("Belirtilen kişiye mesaj yollanır")
+        .setName("admin-mesaj")
+        .setDescription("(Admin komutu)Belirtilen kişiye mesaj yollanır")
         .addUserOption(option =>
             option.setName('hedef')
                 .setDescription("Mesaj gönderilecek kişi.")
@@ -16,6 +16,12 @@ module.exports = {
         ),
     async execute(interaction) {
         const { options, guild } = interaction;
+        if(!(adminid==interaction.member.id)) {
+            const yetkiembed = new EmbedBuilder()
+                .setTitle('Bu komutu kullanmak için yetkiniz yok.')
+                .setColor('DarkRed');
+            return interaction.reply({embeds:[yetkiembed]});
+        }
         const user = options.getUser('hedef');
         const member = guild.members.cache.get(user.id);
         const gonderilecekmesaj = options.getString('icerik');
