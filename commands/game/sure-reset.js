@@ -35,7 +35,7 @@ module.exports = {
         if(!(adminid==userid)) {
             return interaction.editReply("Buna yetkiniz yok.");
         }
-        const sifirlanacakid = options.getUser('hedef')|| adminid;
+        const sifirlanacakid = options.getUser('hedef');
         const User = mongoose.model('Kullanici-data',userbotSchema);
         try {
             let user = await User.findOne({id:sifirlanacakid});
