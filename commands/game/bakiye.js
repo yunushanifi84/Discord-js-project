@@ -1,4 +1,4 @@
-const {SlashCommandBuilder} = require('discord.js');
+const {SlashCommandBuilder,EmbedBuilder} = require('discord.js');
 const mongoose = require('mongoose');
 const {dburi} = require('../../config.json');
 
@@ -26,18 +26,28 @@ module.exports = {
         if (mongoose.connection.models['Kullanici-data']) {
             delete mongoose.connection.models['Kullanici-data'];
         }
+        
         await interaction.deferReply();
         const userid = interaction.member.id;
         const User = mongoose.model('Kullanici-data',userbotSchema);
+        const errembed = new EmbedBuilder()
+            .setTitle("Bir hatayla karşılaşıldı lütfen daha sonra tekrar deneyiniz.")
+            .setColor('Red');
         try {
             let user = await User.findOne({id: userid });
+            const succembed = new EmbedBuilder()
+                .setTitle(`Bakiyeniz: ${user.money}`)
+                .setColor('DarkGreen');
+            const kayitembed = new EmbedBuilder()
+                .setTitle('Lütfen önce kayıt olunuz.')
+                .setColor('LightGrey');
             if(!user) {
-                return interaction.editReply("Lütfen önce kayıt olunuz.");
+                return interaction.editReply({embeds:[kayitembed]});
             }
-            return interaction.editReply(`Şu anki bakiyeniz: ${user.money}`);
+            return interaction.editReply({embeds:[succembed]});
         } catch (error) {
             console.error(error);
-            interaction.editReply("Bir hata oluştu daha sonra tekrar deneyiniz.");
+            interaction.editReply({embeds:[errembed]});
         }
     }
 }

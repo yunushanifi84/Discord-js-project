@@ -4,10 +4,7 @@ const path = require('node:path');
 const {Client,REST,Routes,Collection,Events, MessageAttachment,MessageEmbed, GatewayIntentBits, messageLink,ActivityType, IntegrationExpireBehavior} = require('discord.js');
 require('dotenv/config');
 const { token, clientId, guildId } = require('./config.json');
-const gTTs = require('gtts');
-const { joinVoiceChannel, createAudioPlayer, NoSubscriberBehavior, createAudioResource } = require('@discordjs/voice');
 const { error } = require('console');
-const {distube} = require('distube');
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -25,8 +22,6 @@ client.on('ready',() =>{
       });
     
 });
-const kaynak = createAudioResource('./ses/ses.mp3');
-let adminid="718497288963620904";
 
 
 
@@ -126,34 +121,7 @@ client.on('messageCreate',message =>{
 
     let anamesaj = message.content.substring(1);
 
-    if(anamesaj.toLowerCase().startsWith('ses ')){
-        let soylenecek = anamesaj.substring(4);
-        const gtts = new gTTs(soylenecek,'tr');
-        gtts.save(`./ses/${soylenecek}.mp3`, (err) => {
-            if(err) console.log(err);
-            message.channel.send("Söyleniyor...");
-        });
-        const player = createAudioPlayer();
-        const kaynak = createAudioResource(`./ses/${soylenecek}.mp3`);
-        player.play(kaynak);
-        try {
-            console.log(soylenecek);
-            const Connection = joinVoiceChannel({
-                channelId: message.member.voice.channel.id,
-                guildId: message.member.guild.id,
-                adapterCreator: message.member.guild.voiceAdapterCreator,
-            });
-            try {
-                Connection.subscribe(player);
-            } catch(error) {
-                Connection.destroy();
-            }
-        
-        } catch(error) {
-            console.log(error);
-        }
-
-    }
+    
 
     
 
