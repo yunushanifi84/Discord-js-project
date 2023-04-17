@@ -15,7 +15,7 @@ const db = mongoose.connection;
 
 db.on('error',console.error.bind(console, 'Bağlantı hatası.'));
 db.once('open', function() {
-    console.log('Veritabanı bağlantısı tamam.(Bakiye)');
+    console.log('Veritabanı bağlantısı tamam.(para-gonder)');
 });
 
 module.exports = {
