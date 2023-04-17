@@ -28,7 +28,7 @@ function sleep(ms) {
 module.exports = {
     data:new SlashCommandBuilder()
         .setName('odul-al')
-        .setDescription("Her yarım saatte bir rastgele ödül kazanırsınız.(2 zar atılır toplamlarının 10 katı kadar)"),    
+        .setDescription("Her 15 dakikada bir rastgele ödül kazanırsınız.(2 zar atılır toplamlarının 10 katı kadar)"),    
     async execute(interaction) {
         const atma = new EmbedBuilder()
             .setColor('Aqua')
@@ -72,7 +72,7 @@ module.exports = {
             let miktar = (firstdice+seconddice)*10;
             user.money+=miktar;
             
-            user.nextPrize = now + (1800000);
+            user.nextPrize = now + (900000);
             const basariliatim = new EmbedBuilder()
                 .setTitle('Zarlar başarıyla atıldı.')
                 .setFields([
