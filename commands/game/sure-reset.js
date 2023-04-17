@@ -20,8 +20,13 @@ db.once('open', function() {
 module.exports = {
     data:new SlashCommandBuilder()
         .setName('sure-reset')
-        .setDescription("Admin komutudur .. kısaca ödül süresini resetler"),
+        .setDescription("Admin komutudur .. kısaca ödül süresini resetler")
+        .addUserOption(option => {
+            option.setName('hedef')
+                .setDescription("Komutu kullanmak istediğiniz kişi")
+        }),
     async execute(interaction) {
+        const {options} = interaction;
         if (mongoose.connection.models['Kullanici-data']) {
             delete mongoose.connection.models['Kullanici-data'];
         }
@@ -30,9 +35,10 @@ module.exports = {
         if(!(adminid==userid)) {
             return interaction.editReply("Buna yetkiniz yok.");
         }
+        const sifirlanacakid = options.getUser('hedef')|| adminid;
         const User = mongoose.model('Kullanici-data',userbotSchema);
         try {
-            let user = await User.findOne({id:userid});
+            let user = await User.findOne({id:sifirlanacakid});
             if(!user) {
                 return interaction.editReply("Lütfen önce kayıt olunuz.");
             }
