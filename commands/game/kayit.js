@@ -5,7 +5,8 @@ const {dburi} = require('../../config.json');
 const userbotSchema = new mongoose.Schema({
     id: String,
     money: {type:Number, default:0},
-    nextPrize: {type: Date, default: Date.now}
+    nextPrize: {type: Date, default: Date.now},
+    DisplayName: String
 });
 
 mongoose.connect(dburi, {
