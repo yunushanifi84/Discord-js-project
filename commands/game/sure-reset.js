@@ -24,6 +24,7 @@ module.exports = {
         .addUserOption(option =>
             option.setName('hedef')
                 .setDescription("Komutu kullanmak istediğiniz kişi.")
+                .setRequired(true)
         ),
     async execute(interaction) {
         const {options} = interaction;

@@ -20,15 +20,19 @@ db.once('open', function() {
 module.exports = {
     data:new SlashCommandBuilder()
         .setName('bakiye')
-        .setDescription("Bot içi bakiyenizi görebilirsiniz."),
-    
+        .setDescription("Bot içi bakiyenizi görebilirsiniz.")
+        .addUserOption(option =>
+            option.setName('hedef')
+                .setDescription("Parasını görmek istediğiniz kişi.")    
+        ),
+        
     async execute(interaction) {
         if (mongoose.connection.models['Kullanici-data']) {
             delete mongoose.connection.models['Kullanici-data'];
         }
         
         await interaction.deferReply();
-        const userid = interaction.member.id;
+        const userid = interaction.options.getUser('hedef') || interaction.member.id;
         const User = mongoose.model('Kullanici-data',userbotSchema);
         const errembed = new EmbedBuilder()
             .setTitle("Bir hatayla karşılaşıldı lütfen daha sonra tekrar deneyiniz.")
