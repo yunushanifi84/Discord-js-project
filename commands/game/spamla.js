@@ -21,7 +21,7 @@ db.once('open', function() {
 module.exports = {
     data:new SlashCommandBuilder()
         .setName('spamla')
-        .setDescription("Bot puanları kullanarak kişiye özelden mesaj yağdırabilirsiniz.(mesaj başına 100 puan/minimum 10 mesaj)")
+        .setDescription("Bot puanları kullanarak kişiye özelden mesaj yağdırabilirsiniz./100pm")
         .addUserOption(option =>
             option.setName('hedef')
                 .setDescription("Mesaj göndertmek istediğiniz kişi")
