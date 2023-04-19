@@ -34,6 +34,7 @@ module.exports = {
         await interaction.deferReply();
         const userid = interaction.options.getUser('hedef').id;
         if(!userid) {
+            console.log('userid yok if e girildi.');
             userid=interaction.member.id;
         }
         const usersubject=interaction.guild.members.cache.get(userid);
