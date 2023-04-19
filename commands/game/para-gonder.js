@@ -41,6 +41,7 @@ module.exports = {
         const userid = interaction.member.id;
         const User = mongoose.model('Kullanici-data',userbotSchema);
         const gonderilecekid = options.getUser('hedef').id;
+        const gonderileceknesne = interaction.guild.members.cache.get(gonderilecekid);
         const miktar = options.getNumber('para');
         try {
             let user1 = await User.findOne({id:userid});
@@ -60,7 +61,11 @@ module.exports = {
             user1.money -=miktar;
             user2.money +=miktar;
             const succembed = new EmbedBuilder()
-                .setTitle(`İşlem başarılı. Yeni bakiyeniz: ${user1.money}`)
+                .setTitle(`İşlem başarılı.`)
+                .setFields([
+                    {name:'Gönderilen tutar:',value:`${miktar}`},
+                    {name:'Gönderilen kişi:',value:`${gonderileceknesne.displayName}`}
+                ])
                 .setColor('DarkGreen');
             user1.save();
             user2.save();
