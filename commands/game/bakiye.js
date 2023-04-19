@@ -33,6 +33,7 @@ module.exports = {
         
         await interaction.deferReply();
         const userid = interaction.options.getUser('hedef').id || interaction.member.id;
+        const usersubject=interaction.guild.cache.get(userid);
         const User = mongoose.model('Kullanici-data',userbotSchema);
         const errembed = new EmbedBuilder()
             .setTitle("Bir hatayla karşılaşıldı lütfen daha sonra tekrar deneyiniz.")
@@ -40,7 +41,7 @@ module.exports = {
         try {
             let user = await User.findOne({id: userid });
             const succembed = new EmbedBuilder()
-                .setTitle(`Bakiyeniz: ${user.money}`)
+                .setTitle(`${usersubject.displayName} ' kişisinin Bakiyesi:${user.money}`)
                 .setColor('DarkGreen');
             const kayitembed = new EmbedBuilder()
                 .setTitle('Lütfen önce kayıt olunuz.')
