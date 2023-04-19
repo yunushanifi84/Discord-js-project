@@ -54,6 +54,8 @@ module.exports = {
             if(!user) {
                 return interaction.editReply({embeds:[kayitembed]});
             }
+            user.DisplayName = usersubject.displayName;
+            user.save();
             return interaction.editReply({embeds:[succembed]});
         } catch (error) {
             console.error(error);
