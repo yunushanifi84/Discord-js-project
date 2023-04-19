@@ -33,7 +33,7 @@ module.exports = {
         
         await interaction.deferReply();
         const userid = interaction.options.getUser('hedef').id || interaction.member.id;
-        const usersubject=interaction.guild.cache.get(userid);
+        const usersubject=interaction.guild.members.cache.get(userid);
         const User = mongoose.model('Kullanici-data',userbotSchema);
         const errembed = new EmbedBuilder()
             .setTitle("Bir hatayla karşılaşıldı lütfen daha sonra tekrar deneyiniz.")
