@@ -63,7 +63,7 @@ module.exports = {
             }
             //para kontrolü
             const ucret = (miktar)*100;
-            if(ucret<user.money) {
+            if(ucret>user.money) {
                 const parayok = new EmbedBuilder()
                     .setTitle('Yeterli paranız bulunmamakta...')
                     .setColor('Orange');
