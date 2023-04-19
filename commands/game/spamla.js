@@ -74,7 +74,7 @@ module.exports = {
             const succembed = new EmbedBuilder()
                 .setTitle('Mesaj gönderiliyor....')
                 .setFields([
-                    {name:'Mesajın içeriği',value:`${gonderilecekmesaj}`},
+                    {name:'Mesajın içeriği',value:`${mesaj}`},
                     {name:'Mesaj adeti',value:`${miktar}`},
                     {name:'Bedeli',value:`${ucret} puan kullanıldı.`},
                     {name:'Kalan para',value:`${user.money}`}
