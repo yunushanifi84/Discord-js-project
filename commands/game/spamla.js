@@ -70,7 +70,7 @@ module.exports = {
                 return interaction.editReply({embeds:[parayok]});
             }
             user.money-=ucret;
-            await user.save();
+            
             const succembed = new EmbedBuilder()
                 .setTitle('Mesaj gönderiliyor....')
                 .setFields([
@@ -80,12 +80,12 @@ module.exports = {
                     {name:'Kalan para',value:`${user.money}`}
                 ])
                 .setColor('Green');
-            
+            await interaction.editReply({embeds:[succembed], ephemeral:true});
             //mesaj gönderimi..
             for(let i=0;i<miktar;i++){
                 await hedefnesne.send(mesaj);
             }
-            await interaction.editReply({embeds:[succembed], ephemeral:true});
+            await user.save();
         } catch(err) {
             console.log(err);
             const errEmbed = new EmbedBuilder()
