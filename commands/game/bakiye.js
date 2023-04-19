@@ -33,7 +33,7 @@ module.exports = {
         
         await interaction.deferReply();
         const userid = interaction.options.getUser('hedef')?.id;
-        if(userid==null) {
+        if(!userid) {
             console.log('userid yok if e girildi.');
             userid=interaction.member.id;
         }
