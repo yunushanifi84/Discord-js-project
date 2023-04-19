@@ -37,7 +37,7 @@ module.exports = {
                 .setDescription("Kaç tane mesaj göndereceğiniz.")
                 .setRequired(true)    
         ),
-    async execıte(interaction) {
+    async execute(interaction) {
         //Model kontorlü
         if (mongoose.connection.models['Kullanici-data']) {
             delete mongoose.connection.models['Kullanici-data'];
