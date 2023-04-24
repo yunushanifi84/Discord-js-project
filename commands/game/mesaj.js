@@ -62,17 +62,10 @@ module.exports = {
                 return interaction.editReply({embeds:[parayok]});
             }
             user.money-=ucret;
-            await user.save();
-            const succembed = new EmbedBuilder()
-                .setTitle('Mesaj gönderiliyor....')
-                .setFields([
-                    {name:'Mesajın içeriği',value:`${gonderilecekmesaj}`},
-                    {name:'Bedeli',value:`${ucret} puan kullanıldı.`},
-                    {name:'Kalan para',value:`${user.money}`}
-                ])
-                .setColor('Green');
             await member.send(gonderilecekmesaj);
-            await interaction.editReply({embeds:[succembed], ephemeral:true});
+            await user.save();
+            
+            await interaction.editReply({content:`Mesaj gönderildi ücret : ${ucret}    Kalan para: ${user.money} `, ephemeral:true});
         } catch(err) {
             console.log(err);
             await interaction.editReply({content:'Bir hatayla karşılaşıldı', ephemeral:true});

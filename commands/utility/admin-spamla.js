@@ -30,7 +30,6 @@ module.exports = {
         const mesaj = options.getString('mesaj');
         const miktar = options.getNumber('miktar');
         const hedefnesne = guild.members.cache.get(hedef.id);
-        const User = mongoose.model('Kullanici-data',userbotSchema);
         //db kontrolü
         const userid = interaction.member.id;
         try {
@@ -39,8 +38,6 @@ module.exports = {
                 .setFields([
                     {name:'Mesajın içeriği',value:`${mesaj}`},
                     {name:'Mesaj adeti',value:`${miktar}`},
-                    {name:'Bedeli',value:`${ucret} puan kullanıldı.`},
-                    {name:'Kalan para',value:`${user.money}`}
                 ])
                 .setColor('Green');
             await interaction.editReply({embeds:[succembed], ephemeral:true});

@@ -18,13 +18,7 @@ module.exports = {
             return interaction.reply({embeds:[yetkiembed]});
         }
         const yazi = options.getString('yazi');
-        const succEmbed = new EmbedBuilder()
-            .setTitle("Mesajınız Söyleniyor...")
-            .setFields([
-                {name:'Söylenen mesaj',value:`${yazi}`}
-            ])
-            .setColor('Green');
-        await interaction.reply({embeds:[succEmbed], ephemeral:true});
+        await interaction.reply({content:`Mesaj Gönderildi.`, ephemeral:true});
         await interaction.channel.send(`${yazi}`);
     }
 }
