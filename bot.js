@@ -108,7 +108,13 @@ client.on('messageCreate',message =>{
         message.react("🇦")
         message.react("🇸")
     }
-
+    if(message.channel == '1099974910950002719' && message.content == "") {
+        message.react("🇦");
+        message.react("🇧");
+        message.react("🇨");
+        message.react("🇩");
+        message.react("🇪");
+    }
 
 
 
