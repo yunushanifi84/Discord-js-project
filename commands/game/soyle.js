@@ -63,7 +63,7 @@ module.exports = {
                 ])
                 .setColor('Green');
             await interaction.channel.send(`${yazi}`);
-            return interaction.editReply({embeds:[succembed],ephemeral:true});
+            return interaction.editReply({content:"gönderim başarılı",ephemeral:true});
         }catch(err) {
             console.log(err);
             await interaction.editReply({content:'Bir hatayla karşılaşıldı', ephemeral:true});
