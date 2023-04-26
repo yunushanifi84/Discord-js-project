@@ -43,7 +43,9 @@ module.exports = {
         try {
             if(kullanilacak_komut == 'canta') {
                 if(hedefuser == "player1") {
-                    exec("python ./commands/aincrad/pythonfiles/player1-bag.py");
+                    exec("python ./commands/aincrad/pythonfiles/player1-bag.py",(stdout) => {
+                        console.log(stdout);
+                    });
                     let SuccEmbed = new EmbedBuilder()
                     .setTitle("Başarılı Bir şekilde komut kullanıldı")
                     .setFields([
