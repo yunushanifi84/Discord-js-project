@@ -3,5 +3,9 @@
 	"clientId": "",
 	"guildId": "",
 	"dburi": "",
-	"adminid":""
+	"adminid":"",
+	"playertoken1":"",
+	"playertoken2":"",
+	"playertoken3":"",
+	"playertoken4":""
 }
