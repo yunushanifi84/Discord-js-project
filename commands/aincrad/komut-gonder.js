@@ -55,7 +55,7 @@ module.exports = {
                     return interaction.editReply({embeds:[SuccEmbed]});
                 }
                 if(hedefuser == "player2") {
-                    exec("python ./commands/aincrad/pythonfiles/player2-bag.py");
+                    exec("python3 ./commands/aincrad/pythonfiles/player2-bag.py");
                     let SuccEmbed = new EmbedBuilder()
                     .setTitle("Başarılı Bir şekilde komut kullanıldı")
                     .setFields([
@@ -65,7 +65,7 @@ module.exports = {
                     return interaction.editReply({embeds:[SuccEmbed]});
                 }
                 if(hedefuser == "player3") {
-                    exec("python ./commands/aincrad/pythonfiles/player3-bag.py");
+                    exec("python3 ./commands/aincrad/pythonfiles/player3-bag.py");
                     let SuccEmbed = new EmbedBuilder()
                     .setTitle("Başarılı Bir şekilde komut kullanıldı")
                     .setFields([
@@ -75,7 +75,7 @@ module.exports = {
                     return interaction.editReply({embeds:[SuccEmbed]});
                 }
                 if(hedefuser == "player4") {
-                    exec("python ./commands/aincrad/pythonfiles/player4-bag.py");
+                    exec("python3 ./commands/aincrad/pythonfiles/player4-bag.py");
                     let SuccEmbed = new EmbedBuilder()
                     .setTitle("Başarılı Bir şekilde komut kullanıldı")
                     .setFields([
