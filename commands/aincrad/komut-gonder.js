@@ -43,7 +43,7 @@ module.exports = {
         try {
             if(kullanilacak_komut == 'canta') {
                 if(hedefuser == "player1") {
-                    exec("python ./commands/aincrad/pythonfiles/player1-bag.py",(stdout) => {
+                    exec("python3 ./commands/aincrad/pythonfiles/player1-bag.py",(stdout) => {
                         console.log(stdout);
                     });
                     let SuccEmbed = new EmbedBuilder()
